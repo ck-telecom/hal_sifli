@@ -3,6 +3,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+zephyr_compile_definitions(
+  -DSOC_BF0_HCPU
+  -DHAL_TICK_PER_SECOND=1000
+  -DUSE_HAL_DRIVER
+)
+
+zephyr_compile_definitions_ifdef(CONFIG_SOC_SERIES_SF32LB52X SF32LB52X)
+zephyr_compile_definitions_ifdef(CONFIG_SOC_SERIES_SF32LB52X SOC_SF32LB52X)
+zephyr_compile_definitions_ifdef(CONFIG_SOC_SERIES_SF32LB52X NONE_HAL_TICK_INIT)
+
 zephyr_include_directories(Include) # dir name with lower case to get good score in zephyr github CI
 zephyr_include_directories(cmsis/Include)
 
